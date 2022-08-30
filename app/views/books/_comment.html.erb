@@ -1,5 +1,5 @@
 <table class='table'>
-        <% books.book_comments.each do |book_comment| %>
+        <% book.book_comments.each do |book_comment| %>
         <tr><td>
           <%= link_to user_path(book_comment.user.id) do %>
             <%= image_tag book_comment.user.get_profile_image(100,100) %>
@@ -11,9 +11,11 @@
         </td>
         <td>
           <% if book_comment.user == current_user %>
-            <%= link_to "destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-sm btn-danger"  %>
+            <%= link_to "destroy", book_book_comment_path(book,book_comment.id), remote: true, method: :delete, class: "btn btn-sm btn-danger"  %>
           <% end %>
         </td>
         <% end %>
         </tr>
       </table>
+      
+      

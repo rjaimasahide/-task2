@@ -25,6 +25,7 @@
           <td><%= link_to book_path(@books.id) do %>
               <%= @books.title %>
               <% end %></td>
+          <td><%= render 'books/post', book: @books %></td>
           <td><%= @books.body %></td>
           <% if @books.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@books), class: "btn btn-sm btn-success" %></td>
@@ -34,15 +35,13 @@
         </tr>
       </table>
 
+        <div id="comment-<%= @books.id %>">
+				<%= render 'comment', book: @books %>
+				</div>
 
-      <%= render 'comment', books: @books %>
-
-      <div>
-        <%= form_with model: [@books, @book_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
-        <% end %>
-      </div>
+        <div id="comment-<%= @books.id %>">
+          <%= render 'new', books: @books, comment: @comment %>
+        </div>
     </div>
   </div>
 </div>
