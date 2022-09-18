@@ -8,11 +8,10 @@ class BookCommentsController < ApplicationController
     @comment.user_id = current_user.id
     @comment.book_id = @books.id
     @comment.save
-
   end
 
   def destroy
-    @books = Book.find(params[:book_id])
+    @book = Book.find(params[:book_id])
     @comment = BookComment.find(params[:id])
     @comment.destroy
 

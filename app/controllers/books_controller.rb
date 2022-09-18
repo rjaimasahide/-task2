@@ -8,7 +8,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    @books = Book.left_outer_joins(:favorites).group('books.id').select('books.* COUNT(favorites.*) AS favorites_count').distinct.reorder(favorites_count: :desc).limit(100)
     @book = Book.new
   end
 
@@ -44,6 +44,7 @@ class BooksController < ApplicationController
     @book.destroy
     redirect_to books_path
   end
+
 
   private
 

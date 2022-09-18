@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+  #検索機能
   get "search" => "searches#search"
+  #フォロー機能
   get 'relationships/create'
   get 'relationships/destroy'
+  #DM機能
+  get 'chat/:id', to: 'chats#show', as: 'chat'
+  resources :chats, only: [:create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
   root to: "homes#top"
